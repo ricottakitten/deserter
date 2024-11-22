@@ -1,8 +1,8 @@
 {
-	"name": "Jam",
+	"name": "Deserter",
 	"version_number": "1.0.0",
-	"website_url": "https://github.com/ricottakitten/deserter",
-	"description": "Example character for the RoRR Modding toolkit.",
+	"website_url": "https://github.com/RoRRModdingToolkit/RoRR_Modding_Toolkit/wiki",
+	"description": "character... :3",
 	"dependencies": [
 		"ReturnOfModding-ReturnOfModding-1.0.40",
 		"RoRRModdingToolkit-RoRR_Modding_Toolkit-1.1.21"
