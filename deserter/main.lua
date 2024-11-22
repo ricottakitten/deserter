@@ -156,7 +156,7 @@ local initialize = function()
     skill_engage:set_skill_properties(1, 20) -- 100% of base damage, 20 frames cooldown
 
 
-    skill_engage:set_skill_stock(6, 6, 0, 1)
+    skill_engage:set_skill_stock(6, 6, 0, 0)
 
 
     -- the onActivate callback is called when the player tries to use its primary skill
@@ -176,7 +176,11 @@ state_stab:onStep(function(actor, data)
     actor:skill_util_fix_hspeed()
     
     -- Get the animation from the skill and set it for this state with a custom speed
+    if actor:get_active_skill(Skill.SLOT.primary).stock >= 1 then
+    actor:actor_animation_set(actor:actor_get_skill_animation(skill_raspberry), 0.30)
+    else
     actor:actor_animation_set(actor:actor_get_skill_animation(skill_engage), 0.25)
+    end
     
     -- Check if we already fired and 
     -- if the animation is frame number is greater or equal to 4
@@ -202,23 +206,29 @@ state_stab:onStep(function(actor, data)
                     -- Fire an explosion from the survivor
                     
            
-
+                    if actor:get_active_skill(Skill.SLOT.primary).stock >= 1 then
                     local attack = GM._mod_attack_fire_explosion(actor, actor.x + gm.cos(gm.degtorad(actor:skill_util_facing_direction())) * 80, actor.y, 200, 120, damage, gm.constants.sEnforcerGrenadeExplosion, gm.constants.sSparks7)
-
-                    -- You can also use actor:fire_explosion() but it returns a damager (attack-info) instead of an Attack object so I'm not using it for now
-                    
-                    -- Specify how many enemies should be hit by the explosion
+                    attack.max_hit_number = 5
+                    attack.attack_info.climb = i * 8
+                    actor:sound_play(gm.constants.wEnforcerShoot1, 1, 0.8 + math.random() * 0.2)
+                    actor:get_active_skill(Skill.SLOT.primary).stock = actor:get_active_skill(Skill.SLOT.primary).stock - 1
+                    else
+                    local attack = GM._mod_attack_fire_explosion(actor, actor.x + gm.cos(gm.degtorad(actor:skill_util_facing_direction())) * 25, actor.y, 40, 60, damage, -1, gm.constants.sSparks7)
+                    attack.attack_info.knockback_kind = 1
+                    actor:sound_play(gm.constants.wClayShoot1, 1, 0.8 + math.random() * 0.2)
+                                        -- Specify how many enemies should be hit by the explosion
                     attack.max_hit_number = 5
 
                     -- Offset the displayed damage number for each clone
                     attack.attack_info.climb = i * 8
+                    end
                 end
             end
         end
 
         -- Play a sound at the player's location
         -- (sound_id, volume, pitch)
-        actor:sound_play(gm.constants.wEnforcerShoot1, 1, 0.8 + math.random() * 0.2)
+        
 
         -- Tell that we fired
         data.fired = 1
@@ -349,8 +359,12 @@ end)
     -- Called when the player tries to use its utility skill
     skill_roll:onActivate(function(actor, skill, index)
         GM.actor_set_state(actor, state_roll)
+        if actor:get_active_skill(Skill.SLOT.primary).stock < 6 then
         actor:sound_play(gm.constants.wReload, 1, 0.9 + math.random() * 0.2)
         actor:actor_skill_add_stock(actor, 0, false, 1)     -- actor, slot, ignore cap, raw value
+        else
+
+        end
     end)
 
     -- Reset the sprite animation to frame 0
