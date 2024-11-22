@@ -1,0 +1,42 @@
+{
+	"skill" : {
+		"jammanZ" : {
+			"name" : "Engage",
+			"description" : "Blast enemies with your shotgun for 100% damage."
+		},
+		"jammanX" : {
+			"name" : "Raspberry Bullet",
+			"description" : "Fire all loaded Shells at once!"
+        },
+        "jammanX2" : {
+			"name" : "Spoiled Bullet",
+			"description" : "WIP...."
+		},
+		"jammanC" : {
+			"name" : "Reload",
+			"description" : "Insert one shell back into your shotgun."
+		},
+		"jammanV" : {
+			"name" : "Spikes of Death",
+			"description" : "Form spikes in front of yourself dealing up to <y>3x240% damage</c>."
+		},
+		"jammanVBoosted" : {
+			"name" : "Spikes of Super Death",
+			"description" : "Form spikes in both directions dealing up to <y>2x3x240% damage</c>."
+		}
+	},
+
+	"survivor" : {
+		"jamman" : {
+			"endQuote" : "..and so it left, still not knowing how it got here to begin with.",
+			"description" : "mmmmm dessert",
+			"name" :  "deserter",
+			"nameUpper" : "DESERTER",
+
+			"story" : "<ul>Passenger Details:\n<y>[Merchandise Class] \n\n<ul>This pot of jam seems expired.",
+            "id" : "Travel ID: 53C1992745627123502",
+            "departure"  : "<y>Departure:</c>\nFridge,\nGrandma's House,\nEarth",
+            "arrival" : "<y>Destination:</c>\nBread,\nPlate,\nEarth"
+		}
+	}
+}
