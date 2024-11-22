@@ -365,7 +365,7 @@ end)
 
     -- Implement the actual mechanics of the skill
     state_roll:onStep(function(actor, data)
-        actor:skill_util_fix_hspeed()
+        --actor:skill_util_fix_hspeed()
         
         actor.sprite_index = actor:actor_get_skill_animation(skill_roll)
         actor.image_speed = 0.8
